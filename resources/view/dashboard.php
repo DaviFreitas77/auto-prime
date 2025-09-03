@@ -1,5 +1,5 @@
 <?php 
-require('../middleware/auth.php');
+require('../../app/middleware/auth.php');
 if(isset($_SESSION['name'])){
     $name = $_SESSION['name'];
 }else

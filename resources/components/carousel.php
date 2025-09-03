@@ -1,5 +1,5 @@
 <?php
-include '../src/data/carrosel.php';    
+include '../../src/data/carrosel.php';    
 function renderCarrosel($carousel) {
 ?>
 <div class="swiper h-full">

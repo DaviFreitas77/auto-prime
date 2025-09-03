@@ -1,5 +1,5 @@
 <?php
-include "../src/components/carousel.php";
+include "../components/carousel.php";
     
 session_start();
 $errors = $_SESSION['errors'] ?? [];
@@ -42,7 +42,7 @@ if (isset($_SESSION['name'])) {
                 </div>
 
                 <form class="text-sm w-full max-w-lg flex flex-col justify-center items-center gap-6"
-                    action="../controller/auth/LoginController.php" method="POST">
+                    action="../../app/controller/auth/LoginController.php" method="POST">
 
                     <a href="#" class="w-full h-14 flex items-center justify-center gap-3 border border-gray-300 rounded-sm text-gray-700 font-medium hover:bg-gray-50">
                         <svg class="w-5 h-5" viewBox="0 0 48 48">

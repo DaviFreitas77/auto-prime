@@ -1,6 +1,6 @@
 <?php
 require(__DIR__ . '/../../model/User.php');
-require(__DIR__ . '/../../database.php');
+require(__DIR__ . '/../../../database.php');
 
 class LoginController
 {
@@ -23,7 +23,7 @@ class LoginController
             $_SESSION['errors']['message']= "Preencha todos os campos";
             $_SESSION['old'] = $_POST;
             $_SESSION['errorInput']  = true;
-            header("Location: ../../view/login.php");
+            header("Location: ../../../resources/view/login.php");
             exit;
             return;
         }
@@ -35,14 +35,16 @@ class LoginController
 
             $_SESSION['errors']['message'] = "Credenciais inválidas";
             $_SESSION['old'] = $_POST;
-            header("Location: ../../view/login.php");
+            header("Location: ../../../resources/view/login.php");
             exit;
         }
         $_SESSION['name'] = $login['name'];
         $_SESSION['id'] = $login['id'];
 
-        header("Location: ../../view/dashboard.php");
+        header("Location: ../../../resources/view/dashboard.php");
         exit;
+    
+    
     }
 }
 

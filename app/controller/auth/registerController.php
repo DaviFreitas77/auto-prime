@@ -35,7 +35,7 @@ class registerController
                 $register = $user->registerUser();
                 if ($register) {
                     $_SESSION['message'] = "usuario cadastrado";
-                    header("Location: ../../view/login.php");
+                    header("Location: ../../../resources/view/register.php");
                     exit;
                 } else {
                     $_SESSION['message'] = $register;
@@ -43,7 +43,7 @@ class registerController
             }
             $_SESSION['errors'] = $errors;
             $_SESSION['old'] = $_POST;
-            header("Location: ../../view/register.php");
+            header("Location: ../../../resources/view/register.php");
             exit;
         }
     }
