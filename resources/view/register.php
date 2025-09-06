@@ -5,7 +5,7 @@ $errors = $_SESSION['errors'] ?? [];
 $old = $_SESSION['old'] ?? [];
 unset($_SESSION['errors'], $_SESSION['message'], $_SESSION['old']);
 
-if($_SESSION['name']){
+if(isset($_SESSION['name'])){
    header("Location: ./dashboard.php");
 }
 ?>
@@ -26,7 +26,7 @@ if($_SESSION['name']){
         <p><?= $message ?></p>
     <?php endif; ?>
 
-    <form action="../controller/auth/registerController.php" method="POST">
+    <form action="../../app/controller/auth/registerController.php" method="POST">
 
     <input type="text" name="name" placeholder="Nome" value="<?= htmlspecialchars($old['name'] ?? '') ?>"><br>
     <span style="color:red;"><?= $errors['name'] ?? '' ?></span><br>

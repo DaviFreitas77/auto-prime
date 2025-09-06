@@ -1,4 +1,7 @@
 <?php
+namespace app\model;
+
+use PDOException;
 
 class User
 {
@@ -70,7 +73,7 @@ class User
             $stmt->execute();
 
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return "Erro: " . $e->getMessage();
         }
     }
@@ -82,14 +85,31 @@ class User
             $stmt = $this->conn->prepare("SELECT * FROM  tb_user WHERE cpf = :cpf");
             $stmt->bindParam(':cpf', $cpf);
             $stmt->execute();
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            $user = $stmt->fetch(\PDO::FETCH_ASSOC);
             if ($user && password_verify($this->password, $user['password'])) {
                 return $user;
             } else {
                 return false;
             }
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             return $e->getMessage();
+        }
+    }
+
+    public function ForgotPassword(){
+        try{
+            $cpf =  str_replace(['.', '-'], '', $this->cpf);
+            $stmt = $this->conn->prepare("SELECT * FROM tb_user WHERE cpf = :cpf");
+            $stmt->bindParam(':cpf',$cpf);
+            $stmt->execute();
+            $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+            if($user){
+                return $user;
+            }else{
+                return false;
+            }
+        }catch(PDOException $e){
+            die($e->getMessage());
         }
     }
 }

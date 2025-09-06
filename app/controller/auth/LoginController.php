@@ -1,6 +1,7 @@
 <?php
-require(__DIR__ . '/../../model/User.php');
 require(__DIR__ . '/../../../database.php');
+require(__DIR__ . '/../../../app/model/User.php');
+use app\model\User;
 
 class LoginController
 {
@@ -14,10 +15,8 @@ class LoginController
 
     public function Login()
     {
-
         $cpf = $_POST['cpf'];
         $password = $_POST['password'];
-
 
         if (empty($cpf) || empty($password)) {
             $_SESSION['errors']['message']= "Preencha todos os campos";

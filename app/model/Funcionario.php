@@ -1,46 +1,44 @@
 <?php
-
+namespace app\model;
 class Funcionario
 {
 
     private $id;
     private $name;
     private $cpf;
-    private $cargo;
-    private $setor;
-    private $data_admissao;
-    private $salario;
-    private $endereco;
-    private $telefone;
+    private $position;
+    private $sector;
+    private $admission_date;
+    private $wage;
+    private $address;
+    private $telephone;
     private $email;
-    private $foto;
+    private $photo;
     private $conn;
  
     public function __construct(
-        $id ,
         $name ,
         $cpf ,
-        $cargo ,
-        $setor ,
-        $data_admissao ,
-        $salario ,
-        $endereco ,
-        $telefone ,
+        $position ,
+        $sector ,
+        $admission_date ,
+        $wage ,
+        $address ,
+        $telephone ,
         $email ,
-        $foto, 
+        $photo, 
         $conn
     ) {
-        $this->id = $id;
         $this->name = $name;
         $this->cpf = $cpf;
-        $this->cargo = $cargo;
-        $this->setor = $setor;
-        $this->data_admissao = $data_admissao;
-        $this->salario = $salario;
-        $this->endereco = $endereco;
-        $this->telefone = $telefone;
+        $this->position = $position;
+        $this->sector = $sector;
+        $this->admission_date = $admission_date;
+        $this->wage = $wage;
+        $this->address = $address;
+        $this->telephone = $telephone;
         $this->email = $email;
-        $this->foto = $foto;
+        $this->photo = $photo;
         $this->conn = $conn;
     }
 
@@ -74,64 +72,64 @@ class Funcionario
         $this->cpf = $cpf;
     }
 
-    public function getCargo()
+    public function getposition()
     {
-        return $this->cargo;
+        return $this->position;
     }
 
-    public function setCargo( $cargo)
+    public function setposition( $position)
     {
-        $this->cargo = $cargo;
+        $this->position = $position;
     }
 
-    public function getSetor()
+    public function getsector()
     {
-        return $this->setor;
+        return $this->sector;
     }
 
-    public function setSetor( $setor)
+    public function setsector( $sector)
     {
-        $this->setor = $setor;
+        $this->sector = $sector;
     }
 
     public function getDataAdmissao()
     {
-        return $this->data_admissao;
+        return $this->admission_date;
     }
 
-    public function setDataAdmissao( $data_admissao)
+    public function setDataAdmissao( $admission_date)
     {
-        $this->data_admissao = $data_admissao;
+        $this->admission_date = $admission_date;
     }
 
-    public function getSalario()
+    public function getwage()
     {
-        return $this->salario;
+        return $this->wage;
     }
 
-    public function setSalario($salario)
+    public function setwage($wage)
     {
-        $this->salario = $salario;
+        $this->wage = $wage;
     }
 
-    public function getEndereco()
+    public function getaddress()
     {
-        return $this->endereco;
+        return $this->address;
     }
 
-    public function setEndereco( $endereco)
+    public function setaddress( $address)
     {
-        $this->endereco = $endereco;
+        $this->address = $address;
     }
 
-    public function getTelefone()
+    public function gettelephone()
     {
-        return $this->telefone;
+        return $this->telephone;
     }
 
-    public function setTelefone( $telefone)
+    public function settelephone( $telephone)
     {
-        $this->telefone = $telefone;
+        $this->telephone = $telephone;
     }
 
     public function getEmail()
@@ -144,29 +142,32 @@ class Funcionario
         $this->email = $email;
     }
 
-    public function getFoto()
+    public function getphoto()
     {
-        return $this->foto;
+        return $this->photo;
     }
 
-    public function setFoto( $foto)
+    public function setphoto( $photo)
     {
-        $this->foto = $foto;
+        $this->photo = $photo;
     }
 
     public function registerFunc(){
-        $stmt = $this->conn->prepare('INSERT INTO funcionario (name, cpf, cargo, setor, data_admissao, salario, endereco, telefone, email, foto) VALUES (:name, :cpf, :cargo, :setor, :data_admissao, :salario, :endereco, :telefone, :email, :foto)');
-        $stmt->bindValue(':name', $this->name, PDO::PARAM_STR);
-        $stmt->bindValue(':cpf', $this->cpf, PDO::PARAM_STR);
-        $stmt->bindValue(':cargo', $this->cargo, PDO::PARAM_STR);
-        $stmt->bindValue(':setor', $this->setor, PDO::PARAM_STR);
-        $stmt->bindValue(':data_admissao', $this->data_admissao, PDO::PARAM_STR);
-        $stmt->bindValue(':salario', $this->salario, PDO::PARAM_STR);
-        $stmt->bindValue(':endereco', $this->endereco, PDO::PARAM_STR);
-        $stmt->bindValue(':telefone', $this->telefone, PDO::PARAM_STR);
-        $stmt->bindValue(':email', $this->email, PDO::PARAM_STR);
-        $stmt->bindValue(':foto', $this->foto, PDO::PARAM_STR);
+        $stmt = $this->conn->prepare('INSERT INTO funcionario (name, cpf, position, sector, admission_date, wage, address, telephone, email, photo) VALUES (:name, :cpf, :position, :sector, :admission_date, :wage, :address, :telephone, :email, :photo)');
+        $stmt->bindValue(':name', $this->name, \PDO::PARAM_STR);
+        $stmt->bindValue(':cpf', $this->cpf, \PDO::PARAM_STR);
+        $stmt->bindValue(':position', $this->position, \PDO::PARAM_STR);
+        $stmt->bindValue(':sector', $this->sector, \PDO::PARAM_STR);
+        $stmt->bindValue(':admission_date', $this->admission_date, \PDO::PARAM_STR);
+        $stmt->bindValue(':wage', $this->wage, \PDO::PARAM_STR);
+        $stmt->bindValue(':address', $this->address, \PDO::PARAM_STR);
+        $stmt->bindValue(':telephone', $this->telephone, \PDO::PARAM_STR);
+        $stmt->bindValue(':email', $this->email, \PDO::PARAM_STR);
+        $stmt->bindValue(':photo', $this->photo, \PDO::PARAM_STR);
+        
         $stmt->execute();
+        return $stmt->rowCount() > 0;
+        
     
     }
 }

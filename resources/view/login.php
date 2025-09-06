@@ -63,6 +63,7 @@ if (isset($_SESSION['name'])) {
                     <input
                         class="border border-gray-200 outline-none px-4 w-full h-14 rounded-sm <?php echo $errorInput ? 'border-red-500' : 'border-gray-200' ?>"
                         placeholder="CPF"
+                        maxlength="14"
                         type="text" name="cpf" id="cpf" value="<?= htmlspecialchars($old['cpf'] ?? '') ?>">
 
                     <div class="w-full">
@@ -77,7 +78,9 @@ if (isset($_SESSION['name'])) {
                                 echo '<p class="text-red-500 text-sm mr-auto font-medium">' . htmlspecialchars($errors['message']) . '</p>';
                             }
                             ?>
-                            <p class="text-right text-sm text-gray-600 cursor-pointer hover:underline">Esqueceu a senha?</p>
+                            <a 
+                            href="./ForgotPassword.php"
+                            class="text-right text-sm text-gray-600 cursor-pointer hover:underline">Esqueceu a senha?</a>
                         </div>
                     </div>
 
@@ -94,7 +97,8 @@ if (isset($_SESSION['name'])) {
     </main>
 
 
-    <script src="../src/js/carouselLogin.js"></script>
+    <script src="../../public/js/carouselLogin.js"></script>
+    <script src="../../public/js/regex.js"></script>
 </body>
 
 </html>
