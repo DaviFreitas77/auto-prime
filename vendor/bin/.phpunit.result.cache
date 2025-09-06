@@ -1,0 +1,1 @@
+{"version":2,"defects":{"tests\\controller\\registerControllerTest::testCanInstantiateController":8,"tests\\controller\\registerControllerTest::test_register_success":8},"times":{"tests\\controller\\registerControllerTest::testCanInstantiateController":2.341}}

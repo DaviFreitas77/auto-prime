@@ -1,6 +1,8 @@
 <?php
-require(__DIR__ . '/../../model/User.php');
-require(__DIR__ . '/../../database.php');
+namespace app\controller\auth;
+use app\model\User;
+
+require(__DIR__ . '/../../../database.php');
 
 class registerController
 {

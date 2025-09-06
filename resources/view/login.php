@@ -78,7 +78,9 @@ if (isset($_SESSION['name'])) {
                                 echo '<p class="text-red-500 text-sm mr-auto font-medium">' . htmlspecialchars($errors['message']) . '</p>';
                             }
                             ?>
-                            <p class="text-right text-sm text-gray-600 cursor-pointer hover:underline">Esqueceu a senha?</p>
+                            <a 
+                            href="./ForgotPassword.php"
+                            class="text-right text-sm text-gray-600 cursor-pointer hover:underline">Esqueceu a senha?</a>
                         </div>
                     </div>
 
