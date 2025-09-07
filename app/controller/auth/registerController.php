@@ -1,8 +1,10 @@
 <?php
+
 namespace app\controller\auth;
 use app\model\User;
-
+require __DIR__ . '/../../../vendor/autoload.php';
 require(__DIR__ . '/../../../database.php');
+
 
 class registerController
 {
