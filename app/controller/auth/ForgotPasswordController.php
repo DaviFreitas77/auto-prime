@@ -23,7 +23,7 @@ class ForgotPasswordController
     {
 
         $cpf = $_POST['cpf'];
-
+        
         //verifica se esta vazio
         if (empty($cpf)) {
             $_SESSION['errors']['message'] = "Preencha todos os campos";
@@ -60,17 +60,16 @@ class ForgotPasswordController
             exit;
         }
 
-
-
         //envia o email
         $subject = 'Recuperar sua senha';
-        $message = "Olá " . $forgot['name'] . ", você solicitou a recuperação da senha. Use este código para continuar: " . $codigo;
+        $message = "Olá " . $forgot['nome'] . ", você solicitou a recuperação da senha. Use este código para continuar: " . $codigo;
 
-        $email = new SendMailController($forgot['name'], $forgot['email'], $subject, $message);
+        $email = new SendMailController($forgot['nome'], $forgot['email'], $subject, $message);
         $sendEmail = $email->SendMail();
         $_SESSION['emailSent'] = true;
-        $_SESSION['emailClient']= $forgot['email'];
-         header("Location: ../../../resources/view/ForgotPassword.php");
+        $_SESSION['emailClient'] = $forgot['email'];
+        header("Location: ../../../resources/view/ForgotPassword.php");
+        exit;
         if (!$sendEmail) {
             $_SESSION['errors']['message'] = "Erro ao enviar o email;";
             header("Location: ../../../resources/view/ForgotPassword.php");
