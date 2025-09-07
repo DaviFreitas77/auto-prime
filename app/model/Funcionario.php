@@ -154,16 +154,16 @@ class Funcionario
 
     public function registerFunc(){
         $stmt = $this->conn->prepare('INSERT INTO funcionario (name, cpf, position, sector, admission_date, wage, address, telephone, email, photo) VALUES (:name, :cpf, :position, :sector, :admission_date, :wage, :address, :telephone, :email, :photo)');
-        $stmt->bindValue(':name', $this->name, \PDO::PARAM_STR);
-        $stmt->bindValue(':cpf', $this->cpf, \PDO::PARAM_STR);
-        $stmt->bindValue(':position', $this->position, \PDO::PARAM_STR);
-        $stmt->bindValue(':sector', $this->sector, \PDO::PARAM_STR);
-        $stmt->bindValue(':admission_date', $this->admission_date, \PDO::PARAM_STR);
-        $stmt->bindValue(':wage', $this->wage, \PDO::PARAM_STR);
-        $stmt->bindValue(':address', $this->address, \PDO::PARAM_STR);
-        $stmt->bindValue(':telephone', $this->telephone, \PDO::PARAM_STR);
-        $stmt->bindValue(':email', $this->email, \PDO::PARAM_STR);
-        $stmt->bindValue(':photo', $this->photo, \PDO::PARAM_STR);
+        $stmt->bindParam(':name', $this->name, \PDO::PARAM_STR);
+        $stmt->bindParam(':cpf', $this->cpf, \PDO::PARAM_STR);
+        $stmt->bindParam(':position', $this->position, \PDO::PARAM_STR);
+        $stmt->bindParam(':sector', $this->sector, \PDO::PARAM_STR);
+        $stmt->bindParam(':admission_date', $this->admission_date, \PDO::PARAM_STR);
+        $stmt->bindParam(':wage', $this->wage, \PDO::PARAM_STR);
+        $stmt->bindParam(':address', $this->address, \PDO::PARAM_STR);
+        $stmt->bindParam(':telephone', $this->telephone, \PDO::PARAM_STR);
+        $stmt->bindParam(':email', $this->email, \PDO::PARAM_STR);
+        $stmt->bindParam(':photo', $this->photo, \PDO::PARAM_STR);
         
         $stmt->execute();
         return $stmt->rowCount() > 0;
