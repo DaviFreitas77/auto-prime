@@ -6,6 +6,7 @@ require __DIR__ . '/../../../vendor/autoload.php';
 
 use app\model\ForgotPassword;
 use app\controller\SendMailController;
+use utils\RedirectHelper;
 
 require(__DIR__ . '/../../../database.php');
 
@@ -23,13 +24,13 @@ class ForgotPasswordController
     {
 
         $cpf = $_POST['cpf'];
-        
         //verifica se esta vazio
         if (empty($cpf)) {
-            $_SESSION['errors']['message'] = "Preencha todos os campos";
-            $_SESSION['errorInput'] = true;
-            header("Location: ../../../resources/view/ForgotPassword.php");
-            exit;
+            RedirectHelper::redirectWithError(
+                "Preencha todos os campos",
+                'message',
+                ['errorInput' => true, 'cpf' => $cpf]
+            );
         }
 
         //verifica se o cpf existe no banco de dados
@@ -40,9 +41,10 @@ class ForgotPasswordController
 
         // se não existe,retorna um erro
         if (!$forgot) {
-            $_SESSION['errors']['message'] = "CPF não encontrado";
-            header("Location: ../../../resources/view/ForgotPassword.php");
-            exit;
+            RedirectHelper::redirectWithError(
+                "CPF não encontrado",
+                'message',
+            );
         }
 
         //cria um código aleatótio de 4digitos 
@@ -52,31 +54,83 @@ class ForgotPasswordController
         $forgotPassword->setCreatedAt(date('Y-m-d H:i:s'));
         $forgotPassword->setExpiresAt(date('Y-m-d H:i:s', strtotime('+15 minutes')));
 
-        $forgotPassword->saveCode();
-
-        if (!$forgotPassword) {
-            $_SESSION['errors']['message'] = "Erro ao salvar o código";
-            header("Location: ../../../resources/view/ForgotPassword.php");
-            exit;
+        if (!$forgotPassword->saveCode()) {
+            RedirectHelper::redirectWithError(
+                "Erro ao salvar o código",
+                'message',
+            );
         }
-
+        $_SESSION['cpf'] = $forgot['cpf'];
         //envia o email
         $subject = 'Recuperar sua senha';
         $message = "Olá " . $forgot['nome'] . ", você solicitou a recuperação da senha. Use este código para continuar: " . $codigo;
 
         $email = new SendMailController($forgot['nome'], $forgot['email'], $subject, $message);
         $sendEmail = $email->SendMail();
+
+        if (!$sendEmail) {
+            RedirectHelper::redirectWithError(
+                "Erro ao enviar o email",
+                'message',
+            );
+        }
+
         $_SESSION['emailSent'] = true;
         $_SESSION['emailClient'] = $forgot['email'];
         header("Location: ../../../resources/view/ForgotPassword.php");
         exit;
-        if (!$sendEmail) {
-            $_SESSION['errors']['message'] = "Erro ao enviar o email;";
-            header("Location: ../../../resources/view/ForgotPassword.php");
+    }
+
+    public function ConfirmedCod()
+    {
+        $cod = $_POST['cod'];
+        $confirmCod = new ForgotPassword(null, $cod, null, null, $this->conn);
+        $result = $confirmCod->verifyCod();
+
+        if (!$cod) {
+            RedirectHelper::redirectWithError("Preencha todos os campos", "message", ['errorCod' => true]);
+        }
+
+        if ($result) {
+            RedirectHelper::redirectWithError("",  "message", ['codConfirmed' => true]);
+        } else {
+            RedirectHelper::redirectWithError("Código inválido ou expirado.",  "message", ['errorCod' => true]);
+        }
+    }
+
+    public function changePassword()
+    {
+        $cpf = $_POST['cpf'];
+        $forgotPassword = new ForgotPassword($cpf, null, null, null, $this->conn);
+        $newPassword = $_POST['newPassword'];
+        $hashPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+        if (!$newPassword) {
+            RedirectHelper::redirectWithError("Preencha todos os campos", "message", ['errorPassword' => true]);
+        }
+
+        if ($forgotPassword->changePassword($hashPassword)) {
+            unset($_SESSION['cpf']);
+            $forgotPassword->deleteCode();
+            $_SESSION['success']['message'] = "Senha atualizada com sucesso";
+            header("Location: ../../../resources/view/login.php");
             exit;
+        } else {
+            RedirectHelper::redirectWithError("Erro ao atualizar senha", "message", ['errorPassword' => true]);
         }
     }
 }
-
 $controller = new ForgotPasswordController($conn);
-$controller->forgotPassword();
+
+if (isset($_POST['action'])) {
+    if ($_POST['action'] === 'sendCode') {
+        $controller->forgotPassword();
+    }
+    if ($_POST['action'] === 'sendNewPassword') {
+        $controller->changePassword();
+    }
+
+    if ($_POST['action'] === 'confirmCode') {
+        $controller->ConfirmedCod();
+    }
+}

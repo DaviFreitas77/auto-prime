@@ -1,6 +1,10 @@
 <?php
+
+namespace app\controller\auth;
+
 require(__DIR__ . '/../../../database.php');
 require(__DIR__ . '/../../../app/model/User.php');
+
 use app\model\User;
 
 class LoginController
@@ -19,7 +23,7 @@ class LoginController
         $password = $_POST['password'];
 
         if (empty($cpf) || empty($password)) {
-            $_SESSION['errors']['message']= "Preencha todos os campos";
+            $_SESSION['errors']['message'] = "Preencha todos os campos";
             $_SESSION['old'] = $_POST;
             $_SESSION['errorInput']  = true;
             header("Location: ../../../resources/view/login.php");
@@ -37,13 +41,11 @@ class LoginController
             header("Location: ../../../resources/view/login.php");
             exit;
         }
-        $_SESSION['name'] = $login['name'];
+        $_SESSION['name'] = $login['nome'];
         $_SESSION['id'] = $login['id'];
 
         header("Location: ../../../resources/view/dashboard.php");
         exit;
-    
-    
     }
 }
 

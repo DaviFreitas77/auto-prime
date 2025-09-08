@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS tb_user (
     cpf VARCHAR(14) NOT NULL,
     nome VARCHAR(100),
     email VARCHAR(100),
-    password VARCHAR(100)
+    password VARCHAR(255)
 );
 
 
