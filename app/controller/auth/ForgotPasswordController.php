@@ -47,7 +47,7 @@ class ForgotPasswordController
             );
         }
 
-        //cria um código aleatótio de 4digitos 
+        //cria um código aleatório de 4digitos 
         $codigo = rand(1000, 9999);
 
         $forgotPassword->setCod($codigo);
@@ -92,7 +92,7 @@ class ForgotPasswordController
         }
 
         if ($result) {
-            RedirectHelper::redirectWithError("",  "message", ['codConfirmed' => true]);
+            RedirectHelper::redirectWithSuccess("",  "message", ['codConfirmed' => true]);
         } else {
             RedirectHelper::redirectWithError("Código inválido ou expirado.",  "message", ['errorCod' => true]);
         }
@@ -112,9 +112,7 @@ class ForgotPasswordController
         if ($forgotPassword->changePassword($hashPassword)) {
             unset($_SESSION['cpf']);
             $forgotPassword->deleteCode();
-            $_SESSION['success']['message'] = "Senha atualizada com sucesso";
-            header("Location: ../../../resources/view/login.php");
-            exit;
+            RedirectHelper::redirectWithSuccess("Senha atualizada","message",[],'../../../resources/view/login.php');
         } else {
             RedirectHelper::redirectWithError("Erro ao atualizar senha", "message", ['errorPassword' => true]);
         }

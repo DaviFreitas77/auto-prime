@@ -19,19 +19,8 @@ if (isset($_SESSION['name'])) {
 
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="../src//css/pagination.css">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <title>Login</title>
-</head>
-
-<body>
+<?php include '../../src/layout/layout.php'; ?>
+<body style="font-family: 'Poppins', sans-serif;">
     <main class=" h-screen">
         <section class="flex  h-screen">
             <div class="w-1/2 p-1 hidden md:block">
@@ -65,6 +54,7 @@ if (isset($_SESSION['name'])) {
                             <?php endif; ?>
                         </div>
                         <button
+                        id="buttonForm"
                             class="w-full h-14 bg-black text-white font-bold rounded-sm hover:cursor-pointer hover:opacity-85"
                             type="submit">
                             Confirmar código</button>
@@ -93,6 +83,7 @@ if (isset($_SESSION['name'])) {
                         </div>
 
                         <button
+                        id="buttonForm"
                             class="w-full h-14 bg-black text-white font-bold rounded-sm hover:cursor-pointer hover:opacity-85"
                             type="submit">
                             Entrar</button>
@@ -123,6 +114,7 @@ if (isset($_SESSION['name'])) {
                         </div>
 
                         <button
+                            id="buttonForm"
                             class="w-full h-14 bg-black text-white font-bold rounded-sm hover:cursor-pointer hover:opacity-85"
                             type="submit">
                             Entrar</button>
@@ -136,6 +128,7 @@ if (isset($_SESSION['name'])) {
     </main>
 
 
+    <script src="../../public/js/buttons.js"></script>
     <script src="../../public/js/carouselLogin.js"></script>
     <script src="../../public/js/regex.js"></script>
 </body>
