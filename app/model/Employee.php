@@ -183,6 +183,32 @@ class Employee
         return $stmt->rowCount() > 0;
     }
 
+
+    public function getEmployeeById($id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM tb_employee WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function updateEmployee($id){
+        $stmt = $this->conn->prepare("UPDATE tb_employee SET name = :name, cpf = :cpf, position = :position, sector = :sector, admission_date = :admission_date, wage = :wage, address = :address, telephone = :telephone, email = :email, photo = :photo WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':name', $this->name);
+        $stmt->bindParam(':cpf', $this->cpf);
+        $stmt->bindParam(':position', $this->position);
+        $stmt->bindParam(':sector', $this->sector);
+        $stmt->bindParam(':admission_date', $this->admission_date);
+        $stmt->bindParam(':wage', $this->wage);
+        $stmt->bindParam(':address', $this->address);
+        $stmt->bindParam(':telephone', $this->telephone);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':photo', $this->photo);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
+    }
+
     public function search()
     {
         $this->name     = "$this->name%";
