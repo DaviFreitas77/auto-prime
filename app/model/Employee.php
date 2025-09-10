@@ -211,8 +211,5 @@ class Employee
         $stmt->bindParam(':email', $this->email);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-    
-        
-        
     }
 }

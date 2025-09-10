@@ -16,6 +16,7 @@ if (isset($_SESSION['name'])) {
 <!DOCTYPE html>
 <html lang="pt-br">
 <?php include '../../src/layout/layout.php'; ?>
+
 <body style="font-family: 'Poppins', sans-serif;">
     <main class=" h-screen">
 
@@ -34,7 +35,7 @@ if (isset($_SESSION['name'])) {
                 <form class="text-sm w-full max-w-lg flex flex-col justify-center items-center gap-6"
                     action="../../app/controller/auth/LoginController.php" method="POST">
 
-                   
+
                     <input
                         class="border border-gray-200 outline-none px-4 w-full h-14 rounded-sm <?php echo $errorInput ? 'border-red-500' : 'border-gray-200' ?>"
                         placeholder="CPF"
