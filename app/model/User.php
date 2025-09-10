@@ -95,4 +95,10 @@ class User
             return $e->getMessage();
         }
     }
+
+    public function logOut(){
+        session_destroy();
+        header("Location: /login");
+        exit();
+    }
 }

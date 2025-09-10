@@ -5,6 +5,7 @@ namespace app\model;
 use PDO;
 use PDOException;
 
+
 class ForgotPassword
 {
     private $cpf;
@@ -81,8 +82,9 @@ class ForgotPassword
         }
     }
 
-    public function saveCode(){
-        try{
+    public function saveCode()
+    {
+        try {
             $stmt = $this->conn->prepare("INSERT INTO password_reset (cpf, cod, created_at, expires_at) VALUES (:cpf, :cod, :created_at, :expires_at)");
             $stmt->bindParam(':cpf', $this->cpf, \PDO::PARAM_STR);
             $stmt->bindParam(':cod', $this->cod, \PDO::PARAM_STR);
@@ -90,9 +92,53 @@ class ForgotPassword
             $stmt->bindParam(':expires_at', $this->expires_at, \PDO::PARAM_STR);
             $stmt->execute();
             return true;
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             die($e->getMessage());
         }
     }
 
+
+    public function verifyCod()
+    {
+        try {
+            $stmt = $this->conn->prepare("SELECT * FROM password_reset WHERE cod = :cod");
+            $stmt->bindParam(":cod", $this->cod);
+            $stmt->execute();
+            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+
+            if ($result && $result['expires_at'] >= date('Y-m-d H:i:s')) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function changePassword($newPassword)
+    {
+        try {
+            $stmt = $this->conn->prepare("UPDATE tb_user SET password = :password WHERE cpf = :cpf");
+            $stmt->bindParam(":password",  $newPassword, \PDO::PARAM_STR);
+            $stmt->bindParam(":cpf",$this->cpf, \PDO::PARAM_STR);
+
+            if ($stmt->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function deleteCode()
+    {
+        $stmt = $this->conn->prepare("DELETE FROM password_reset WHERE cpf = :cpf");
+        $stmt->bindParam(":cpf", $this->cpf, \PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
+    }
 }
