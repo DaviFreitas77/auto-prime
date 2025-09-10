@@ -64,7 +64,7 @@ class User
     public function registerUser()
     {
         try {
-            $stmt = $this->conn->prepare("INSERT INTO tb_user (cpf,name,email,password) VALUES (:cpf,:name,:email,:password)");
+            $stmt = $this->conn->prepare("INSERT INTO tb_user (cpf,nome,email,password) VALUES (:cpf,:name,:email,:password)");
 
             $stmt->bindParam(':cpf', $this->cpf);
             $stmt->bindParam(':name', $this->name);

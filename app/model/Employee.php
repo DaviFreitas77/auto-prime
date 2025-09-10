@@ -1,7 +1,8 @@
 <?php
-
 namespace app\model;
 
+use PDOException;
+use PDO;
 class Employee
 {
     private $conn;
@@ -31,6 +32,7 @@ class Employee
         $photo = null,
 
     ) {
+        $this->conn = $conn;
         $this->name = $name;
         $this->cpf = $cpf;
         $this->position = $position;
@@ -41,18 +43,8 @@ class Employee
         $this->telephone = $telephone;
         $this->email = $email;
         $this->photo = $photo;
-        $this->conn = $conn;
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
 
     public function getName()
     {
@@ -156,20 +148,24 @@ class Employee
 
     public function registerFunc()
     {
-        $stmt = $this->conn->prepare('INSERT INTO tb_employee (name, cpf, position, sector, admission_date, wage, address, telephone, email, photo) VALUES (:name, :cpf, :position, :sector, :admission_date, :wage, :address, :telephone, :email, :photo)');
-        $stmt->bindParam(':name', $this->name, \PDO::PARAM_STR);
-        $stmt->bindParam(':cpf', $this->cpf, \PDO::PARAM_STR);
-        $stmt->bindParam(':position', $this->position, \PDO::PARAM_STR);
-        $stmt->bindParam(':sector', $this->sector, \PDO::PARAM_STR);
-        $stmt->bindParam(':admission_date', $this->admission_date, \PDO::PARAM_STR);
-        $stmt->bindParam(':wage', $this->wage, \PDO::PARAM_STR);
-        $stmt->bindParam(':address', $this->address, \PDO::PARAM_STR);
-        $stmt->bindParam(':telephone', $this->telephone, \PDO::PARAM_STR);
-        $stmt->bindParam(':email', $this->email, \PDO::PARAM_STR);
-        $stmt->bindParam(':photo', $this->photo, \PDO::PARAM_STR);
+        try {
+            $stmt = $this->conn->prepare('INSERT INTO tb_employee (name, cpf, position, sector, admission_date, wage, address, telephone, email, photo) VALUES (:name, :cpf, :position, :sector, :admission_date, :wage, :address, :telephone, :email, :photo)');
+            $stmt->bindParam(':name', $this->name, \PDO::PARAM_STR);
+            $stmt->bindParam(':cpf', $this->cpf, \PDO::PARAM_STR);
+            $stmt->bindParam(':position', $this->position, \PDO::PARAM_STR);
+            $stmt->bindParam(':sector', $this->sector, \PDO::PARAM_STR);
+            $stmt->bindParam(':admission_date', $this->admission_date, \PDO::PARAM_STR);
+            $stmt->bindParam(':wage', $this->wage, \PDO::PARAM_STR);
+            $stmt->bindParam(':address', $this->address, \PDO::PARAM_STR);
+            $stmt->bindParam(':telephone', $this->telephone, \PDO::PARAM_STR);
+            $stmt->bindParam(':email', $this->email, \PDO::PARAM_STR);
+            $stmt->bindParam(':photo', $this->photo, \PDO::PARAM_STR);
 
-        $stmt->execute();
-        return $stmt->rowCount() > 0;
+            $stmt->execute();
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
     }
 
     public function allEmployees()
@@ -183,6 +179,32 @@ class Employee
     {
         $stmt = $this->conn->prepare("DELETE FROM tb_employee WHERE id = :id");
         $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
+    }
+
+
+    public function getEmployeeById($id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM tb_employee WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function updateEmployee($id){
+        $stmt = $this->conn->prepare("UPDATE tb_employee SET name = :name, cpf = :cpf, position = :position, sector = :sector, admission_date = :admission_date, wage = :wage, address = :address, telephone = :telephone, email = :email, photo = :photo WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':name', $this->name);
+        $stmt->bindParam(':cpf', $this->cpf);
+        $stmt->bindParam(':position', $this->position);
+        $stmt->bindParam(':sector', $this->sector);
+        $stmt->bindParam(':admission_date', $this->admission_date);
+        $stmt->bindParam(':wage', $this->wage);
+        $stmt->bindParam(':address', $this->address);
+        $stmt->bindParam(':telephone', $this->telephone);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':photo', $this->photo);
         $stmt->execute();
         return $stmt->rowCount() > 0;
     }
