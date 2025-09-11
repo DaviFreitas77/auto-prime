@@ -3,7 +3,6 @@
 namespace app\controller;
 
 require_once __DIR__ . '/../../database.php';
-
 require_once __DIR__ . '/../model/Employee.php';
 require_once __DIR__ . '/../../utils/RedirectHelper.php';
 
@@ -16,6 +15,9 @@ class EmployeeController
 
     public function __construct($conn)
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         $this->conn = $conn;
     }
 
@@ -76,7 +78,6 @@ class EmployeeController
     {
         $id = $_GET['id'];
 
-
         $employee = new Employee($this->conn);
         return $employee->getEmployeeById($id);
     }
@@ -115,22 +116,4 @@ class EmployeeController
         $results = $employee->search();
         return $results;
     }
-}
-
-
-$employeeController = new EmployeeController($conn);
-if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
-    $employeeController->delete();
-}
-
-if (isset($_POST['action']) && $_POST['action'] === 'register') {
-    $employeeController->registerEmployee();
-}
-
-if (isset($_GET['action']) && $_GET['action'] === 'update' && isset($_GET['id'])) {
-    $employeeController->UpdateEmployee();
-}
-
-if (isset($_POST['action']) && $_POST['action'] === 'update' && isset($_POST['id'])) {
-    $employeeController->UpdateEmployee();
 }
