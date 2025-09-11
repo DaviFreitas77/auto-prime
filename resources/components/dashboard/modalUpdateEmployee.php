@@ -10,7 +10,7 @@ function renderModalUpdate($arrayEmployee)
                 <img class="w-20 h-20 rounded-full object-cover border-4 border-teal-900 shadow" src="<?= htmlspecialchars($arrayEmployee['photo'] ?? 'https://via.placeholder.com/150') ?>" alt="Foto do funcionário">
                 <h2 class="mt-4 text-xl font-semibold text-teal-900">Atualizar Funcionário</h2>
             </div>
-            <form class="modal-content" method="POST" action="../../app/controller/EmployeeController.php">
+            <form class="modal-content" method="POST" action="../../../routes/employeeRoutes.php">
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="id" value="<?= htmlspecialchars($arrayEmployee['id']) ?>">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">

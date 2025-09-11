@@ -118,17 +118,3 @@ class ForgotPasswordController
         }
     }
 }
-$controller = new ForgotPasswordController($conn);
-
-if (isset($_POST['action'])) {
-    if ($_POST['action'] === 'sendCode') {
-        $controller->forgotPassword();
-    }
-    if ($_POST['action'] === 'sendNewPassword') {
-        $controller->changePassword();
-    }
-
-    if ($_POST['action'] === 'confirmCode') {
-        $controller->ConfirmedCod();
-    }
-}

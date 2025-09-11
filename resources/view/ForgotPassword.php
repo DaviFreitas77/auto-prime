@@ -37,7 +37,7 @@ if (isset($_SESSION['name'])) {
                         </p>
                     </div>
                     <form class="text-sm w-full max-w-lg flex flex-col justify-center items-center gap-6"
-                        action="../../app/controller/auth/ForgotPasswordController.php" method="POST">
+                        action="../../routes/forgotPasswordRoutes.php" method="POST">
                         <div class="w-full max-w-lg mx-auto">
                             <input type="hidden" name="action" value="confirmCode">
                             <input
@@ -55,7 +55,7 @@ if (isset($_SESSION['name'])) {
                         </div>
                         <button
                         id="buttonForm"
-                            class="w-full h-14 bg-black text-white font-bold rounded-sm hover:cursor-pointer hover:opacity-85"
+                            class="w-full h-14 bg-teal-900 text-white font-bold rounded-sm hover:cursor-pointer hover:opacity-85"
                             type="submit">
                             Confirmar código</button>
                     </form>
@@ -67,7 +67,7 @@ if (isset($_SESSION['name'])) {
                     </div>
 
                     <form class="text-sm w-full max-w-lg flex flex-col justify-center items-center gap-6"
-                        action="../../app/controller/auth/ForgotPasswordController.php" method="POST">
+                        action="../../routes/forgotPasswordRoutes.php" method="POST">
                         <div class="w-full">
                             <input type="hidden" name="cpf" value="<?= $cpf ?>">
                             <input type="hidden" name="action" value="sendNewPassword">
@@ -84,9 +84,9 @@ if (isset($_SESSION['name'])) {
 
                         <button
                         id="buttonForm"
-                            class="w-full h-14 bg-black text-white font-bold rounded-sm hover:cursor-pointer hover:opacity-85"
+                            class="w-full h-14 bg-teal-900 text-white font-bold rounded-sm hover:cursor-pointer hover:opacity-85"
                             type="submit">
-                            Entrar</button>
+                            Redefinir</button>
                     </form>
 
 
@@ -98,7 +98,7 @@ if (isset($_SESSION['name'])) {
                     </div>
 
                     <form class="text-sm w-full max-w-lg flex flex-col justify-center items-center gap-6"
-                        action="../../app/controller/auth/ForgotPasswordController.php" method="POST">
+                        action="../../routes/forgotPasswordRoutes.php" method="POST">
                         <div class="w-full">
                             <input type="hidden" name="action" value="sendCode">
                             <input
@@ -115,9 +115,9 @@ if (isset($_SESSION['name'])) {
 
                         <button
                             id="buttonForm"
-                            class="w-full h-14 bg-black text-white font-bold rounded-sm hover:cursor-pointer hover:opacity-85"
+                            class="w-full h-14 bg-teal-900 text-white font-bold rounded-sm hover:cursor-pointer hover:opacity-85"
                             type="submit">
-                            Entrar</button>
+                            Confirmar</button>
                     </form>
                 <?php endif; ?>
 

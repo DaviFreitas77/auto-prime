@@ -69,7 +69,7 @@ if (isset($_SESSION['name'])) {
 
                     <button
                         id="buttonForm"
-                        class="w-full h-14 bg-black text-white font-bold rounded-sm hover:cursor-pointer hover:opacity-85"
+                        class="w-full h-14 bg-teal-900 text-white font-bold rounded-sm hover:cursor-pointer hover:opacity-85"
                         type="submit">
                         Entrar</button>
                 </form>

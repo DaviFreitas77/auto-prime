@@ -10,7 +10,7 @@ function renderModal()
                 <img class="w-20 h-20 rounded-full object-cover border-4 border-teal-900 shadow" src="https://via.placeholder.com/150" alt="Foto do funcionário">
                 <h2 class="mt-4 text-xl font-semibold text-teal-900">Cadastrar Funcionário</h2>
             </div>
-            <form class="modal-content" method="POST" action="../../app/controller/EmployeeController.php">
+            <form class="modal-content" method="POST" action="../../../routes/employeeRoutes.php">
                 <input type="hidden" name="action" value="register">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                     <input name="name" type="text" class="px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-teal-900 outline-none" placeholder="Nome" required>
