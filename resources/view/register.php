@@ -28,7 +28,7 @@ if(isset($_SESSION['name'])){
 
     <form action="../../app/controller/auth/registerController.php" method="POST">
 
-    <input type="text" name="name" placeholder="Nome" value="<?= htmlspecialchars($old['name'] ?? '') ?>"><br>
+    <input type="text" name="nome" placeholder="Nome" value="<?= htmlspecialchars($old['name'] ?? '') ?>"><br>
     <span style="color:red;"><?= $errors['name'] ?? '' ?></span><br>
 
     <input type="text" name="cpf" placeholder="CPF" value="<?= htmlspecialchars($old['cpf'] ?? '') ?>"><br>

@@ -150,6 +150,7 @@ unset($_SESSION['success'], $_SESSION['errors']);
                     <p class="font-medium">Salário</p>
                     <p class="font-medium">Endereço</p>
                     <p class="font-medium">Setor</p>
+
                     <p class="font-medium">atualizar</p>
                     <p class="font-medium">excluir</p>
                 </div>
