@@ -69,14 +69,15 @@ unset($_SESSION['success'], $_SESSION['errors']);
                 <img src="../../public/images/dashboard/motors.png" alt="prime">
                 <p class="box-border size 80  p-2 w-40 text-2xl"></p>
                 <div class="flex flex-col gap-8 text-white text-base items-center">
-                    <button class="flex items-center gap-4">
+                    <button class="flex items-center gap-4 cursor-pointer">
+                    <button class="flex items-center gap-4 cursor-pointer bg-teal-800 px-4 py-2 rounded-md">
                         <i class="fa-solid fa-chart-line"></i>
-                        <a>Dashboard</a>
+                        <a>Gerenciar</a>
                     </button>
-                    <button class="flex items-center gap-4">
+                    <!-- <button class="flex items-center gap-4 cursor-pointer">
                         <i class="fa-solid fa-chart-line"></i>
                         <a>Estatisticas</a>
-                    </button>
+                    </button> -->
                 </div>
             </section>
         </nav>
@@ -150,40 +151,57 @@ unset($_SESSION['success'], $_SESSION['errors']);
                     <p class="font-medium">Salário</p>
                     <p class="font-medium">Endereço</p>
                     <p class="font-medium">Setor</p>
+
                     <p class="font-medium">atualizar</p>
                     <p class="font-medium">excluir</p>
                 </div>
 
                 <?php foreach ($pagina_atual as $emp): ?>
-                    <div class="grid grid-cols-8 text-sm py-3 w-full border border-[#F3F4F6] rounded-sm text-center items-center">
+                    <div class="grid grid-cols-8 text-sm py-3 w-full border border-[#F3F4F6] rounded-sm text-center items-center ">
                         <p class="text-teal-900"><?= $emp['id'] ?></p>
                         <p><?= $emp['name'] ?></p>
                         <p><?= $emp['position'] ?></p>
                         <p>R$ <?= $emp['wage'] ?></p>
                         <p class=" address"><?= $emp['address'] ?></p>
                         <p><?= $emp['sector'] ?></p>
-                        <button class="text-center flex items-center justify-center openModalUpdate">
-                            <a class="bg-[#F3F4F6] w-10 h-10 flex items-center justify-center rounded-full">
+                        <button class="text-center flex items-center justify-center openModalUpdate ">
+                            <a class="bg-[#F3F4F6] w-10 h-10 flex items-center justify-center rounded-full cursor-pointer hover:bg-teal-800  hover:text-white transition-all duration-400">
                                 <p class="font-medium"><i class="fa-solid fa-pencil"></i></p>
                             </a>
                         </button>
                         <button class="text-center flex items-center justify-center">
-                            <a href="../../routes/employeeRoutes.php?action=delete&id=<?= $emp['id'] ?>" class="bg-[#F3F4F6] w-10 h-10 flex items-center justify-center rounded-full cursor-pointer">
-                                <p class="font-medium"><i class="fa-solid fa-trash text-teal-900"></i></p>
+                            <a href="../../routes/employeeRoutes.php?action=delete&id=<?= $emp['id'] ?>" class="bg-[#F3F4F6] w-10 h-10 flex items-center justify-center rounded-full cursor-pointer hover:bg-teal-800  hover:text-white transition-all duration-400">
+                                <p class="font-medium"><i class="fa-solid fa-trash "></i></p>
                             </a>
                         </button>
 
                         <?php renderModalUpdate($emp); ?>
                     </div>
                 <?php endforeach; ?>
-                <div class="flex gap-2 w-full justify-end">
-                    <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
-                        <a href="?pagina=<?= $i ?><?= $searchParam ?>"
-                            class="px-3 py-1 rounded <?php echo ($i == $pagina) ? 'bg-teal-900 text-white' : 'bg-[#F3F4F6]'; ?>">
-                            <?= $i ?>
-                        </a>
-                    <?php endfor; ?>
-                </div>
+                <?php if ($total_paginas > 1): ?>
+                    <div class="flex gap-2 w-full justify-end items-center">
+                        <?php if ($pagina > 1): ?>
+                            <a href="?pagina=<?= $pagina - 1 ?><?= $searchParam ?>"
+                                class="px-3 py-1 rounded bg-[#F3F4F6] hover:bg-gray-200">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </a>
+                        <?php endif; ?>
+
+                        <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
+                            <a href="?pagina=<?= $i ?><?= $searchParam ?>"
+                                class="px-3 py-1 rounded <?php echo ($i == $pagina) ? 'bg-teal-900 text-white' : 'bg-[#F3F4F6] hover:bg-gray-200'; ?>">
+                                <?= $i ?>
+                            </a>
+                        <?php endfor; ?>
+
+                        <?php if ($pagina < $total_paginas): ?>
+                            <a href="?pagina=<?= $pagina + 1 ?><?= $searchParam ?>"
+                                class="px-3 py-1 rounded bg-[#F3F4F6] hover:bg-gray-200">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
 
                 <?php if (!empty($success['message']) || !empty($error['message'])): ?>
                     <div id="divToast">
@@ -203,6 +221,7 @@ unset($_SESSION['success'], $_SESSION['errors']);
         </section>
 
 
+        <script src="../../public/js/animation.js"></script>
         <script src="../../public/js/regex.js"></script>
         <script src="../../public/js/modal.js"></script>
         <script src="../../public/js/dashboard.js"></script>

@@ -47,4 +47,4 @@ INSERT INTO tb_employee (name, cpf, position, sector, admission_date, wage, addr
 
 -- Insere dados
 INSERT INTO tb_user (cpf, nome, email, password) VALUES
-('00000000000', 'Davi', 'davifreitaz999@gmail.com', SHA2('12345678', 256));
+('00000000000', 'Davi', 'davifreitaz999@gmail.com','$2y$10$IBragyXdt1I46eRh5gLw1.n2J7phP6.80DDlClcvA898aX97RJBrS');

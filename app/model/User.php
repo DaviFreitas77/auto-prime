@@ -64,15 +64,18 @@ class User
     public function registerUser()
     {
         try {
-            $stmt = $this->conn->prepare("INSERT INTO tb_user (cpf,nome,email,password) VALUES (:cpf,:name,:email,:password)");
+            $stmt = $this->conn->prepare("INSERT INTO tb_user (cpf,nome,email,password) VALUES (:cpf,:nome,:email,:password)");
 
             $stmt->bindParam(':cpf', $this->cpf);
-            $stmt->bindParam(':name', $this->name);
+            $stmt->bindParam(':nome', $this->name);
             $stmt->bindParam(':email', $this->email);
             $stmt->bindParam(':password', $this->password);
             $stmt->execute();
-
-            return true;
+            if ($stmt->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (\PDOException $e) {
             return "Erro: " . $e->getMessage();
         }

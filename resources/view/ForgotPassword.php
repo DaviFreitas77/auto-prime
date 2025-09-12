@@ -36,7 +36,7 @@ if (isset($_SESSION['name'])) {
                             <span class="text-blue-500 font-bold"><?= htmlspecialchars($emailClient) ?></span>.
                         </p>
                     </div>
-                    <form class="text-sm w-full max-w-lg flex flex-col justify-center items-center gap-6"
+                    <form class="text-sm w-full max-w-lg flex flex-col justify-center items-center gap-6 animation transform trasnition-all duration-700 opacity-0 -translate-y-8"
                         action="../../routes/forgotPasswordRoutes.php" method="POST">
                         <div class="w-full max-w-lg mx-auto">
                             <input type="hidden" name="action" value="confirmCode">
@@ -66,7 +66,7 @@ if (isset($_SESSION['name'])) {
                         <p class="text-gray-500 font-medium">Digite uma nova senha para acessar sua conta com segurança.</p>
                     </div>
 
-                    <form class="text-sm w-full max-w-lg flex flex-col justify-center items-center gap-6"
+                    <form class="text-sm w-full max-w-lg flex flex-col justify-center items-center gap-6 animation transform trasnition-all duration-700 opacity-0 -translate-y-8"
                         action="../../routes/forgotPasswordRoutes.php" method="POST">
                         <div class="w-full">
                             <input type="hidden" name="cpf" value="<?= $cpf ?>">
@@ -97,7 +97,7 @@ if (isset($_SESSION['name'])) {
                         <p class="text-gray-500 font-medium">Insira seu CPF para redefinir sua senha com segurança.</p>
                     </div>
 
-                    <form class="text-sm w-full max-w-lg flex flex-col justify-center items-center gap-6"
+                    <form class="text-sm w-full max-w-lg flex flex-col justify-center items-center gap-6 animation transform trasnition-all duration-700 opacity-0 -translate-y-8"
                         action="../../routes/forgotPasswordRoutes.php" method="POST">
                         <div class="w-full">
                             <input type="hidden" name="action" value="sendCode">
@@ -128,6 +128,7 @@ if (isset($_SESSION['name'])) {
     </main>
 
 
+    <script src="../../public/js/animation.js"></script>
     <script src="../../public/js/buttons.js"></script>
     <script src="../../public/js/carouselLogin.js"></script>
     <script src="../../public/js/regex.js"></script>
