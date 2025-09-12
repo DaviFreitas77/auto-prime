@@ -20,7 +20,7 @@ class registerController
     {
         $errors = [];
         if ($_SERVER['REQUEST_METHOD']  === "POST") {
-            $name = $_POST['name'];
+            $name = $_POST['nome'];
             $cpf = $_POST['cpf'];
             $email = $_POST['email'];
             $password = $_POST['password'];
