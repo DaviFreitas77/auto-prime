@@ -1,8 +1,10 @@
 <?php
+
 namespace app\model;
 
 use PDOException;
 use PDO;
+
 class Employee
 {
     private $conn;
@@ -58,7 +60,9 @@ class Employee
 
     public function getCpf()
     {
-        return $this->cpf;
+        $cpf = $this->cpf;
+
+        return preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/', '$1.$2.$3-$4', $cpf);
     }
 
     public function setCpf($cpf)
@@ -103,7 +107,7 @@ class Employee
 
     public function setwage($wage)
     {
-        $this->wage = $wage;
+        $this->wage = str_replace(['.', ','], ['', '.'], $wage);
     }
 
     public function getaddress()
@@ -192,7 +196,8 @@ class Employee
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function updateEmployee($id){
+    public function updateEmployee($id)
+    {
         $stmt = $this->conn->prepare("UPDATE tb_employee SET name = :name, cpf = :cpf, position = :position, sector = :sector, admission_date = :admission_date, wage = :wage, address = :address, telephone = :telephone, email = :email, photo = :photo WHERE id = :id");
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':name', $this->name);

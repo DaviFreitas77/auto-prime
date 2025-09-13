@@ -44,7 +44,8 @@ class EmployeeController
             exit;
         }
 
-        $employee = new Employee($this->conn, $name, $cpf, $position, $sector, $admission_date, $wage, $address, $telephone, $email, $photo);
+        $employee = new Employee($this->conn, $name, $cpf, $position, $sector, $admission_date, '', $address, $telephone, $email, $photo);
+        $employee->setWage($wage);
 
         if ($employee->registerFunc()) {
             $_SESSION['message'] = "Funcionário cadastrado com sucesso";

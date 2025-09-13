@@ -44,15 +44,15 @@ class ReportController
     ';
         foreach ($employees as $employee) {
             $html .= "<tr>
-        <td style='border:1px solid #ccc; padding:4px; width:100px;'>{$employee['name']}</td>
-        <td style='border:1px solid #ccc; padding:4px;  width:100px;'>{$employee['cpf']}</td>
+        <td style='border:1px solid #ccc; padding:4px; width:120px;'>{$employee['name']}</td>
+        <td style='border:1px solid #ccc; padding:4px;  width:120px;'>{$employee['cpf']}</td>
         <td style='border:1px solid #ccc; padding:4px;'>{$employee['position']}</td>
         <td style='border:1px solid #ccc; padding:4px;'>{$employee['sector']}</td>
-        <td style='border:1px solid #ccc; padding:4px;width:100px;'>{$employee['admission_date']}</td>
-        <td style='border:1px solid #ccc; padding:4px;width:100px;'>R$ {$employee['wage']}</td>
-        <td style='border:1px solid #ccc; padding:4px; width:100px;'>{$employee['address']}</td>
-        <td style='border:1px solid #ccc; padding:4px; width:100px;'>{$employee['telephone']}</td>
-        <td style='border:1px solid #ccc; padding:4px; width:100px;'>{$employee['email']}</td>
+        <td style='border:1px solid #ccc; padding:4px;width:120px;'>{$employee['admission_date']}</td>
+        <td style='border:1px solid #ccc; padding:4px;width:120px;'>R$ {$employee['wage']}</td>
+        <td style='border:1px solid #ccc; padding:4px; width:120px;'>{$employee['address']}</td>
+        <td style='border:1px solid #ccc; padding:4px; width:120px;'>{$employee['telephone']}</td>
+        <td style='border:1px solid #ccc; padding:4px; width:120px;'>{$employee['email']}</td>
     </tr>";
         }
         $html .= '

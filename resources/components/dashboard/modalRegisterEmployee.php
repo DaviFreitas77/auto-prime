@@ -14,13 +14,13 @@ function renderModal()
                 <input type="hidden" name="action" value="register">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                     <input name="name" type="text" class="px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-teal-900 outline-none" placeholder="Nome" required>
-                    <input name="cpf" maxlength="14" type="text" class="px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-teal-900 outline-none" placeholder="CPF" required>
+                    <input name="cpf" id="cpf" maxlength="14" type="text" class="px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-teal-900 outline-none" placeholder="CPF" required>
                     <input name="sector" type="text" class="px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-teal-900 outline-none" placeholder="Setor" required>
                     <input name="position" type="text" class="px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-teal-900 outline-none" placeholder="Cargo" required>
                     <input name="admission_date" type="date" class="px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-teal-900 outline-none" placeholder="Data de admissão" required>
-                    <input name="wage" type="text" class="px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-teal-900 outline-none" placeholder="Salário" required>
+                    <input name="wage" id="wage" type="text" class="px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-teal-900 outline-none" placeholder="Salário" maxlength="14" required>
                     <input name="address" type="text" class="px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-teal-900 outline-none" placeholder="Endereço" required>
-                    <input name="telephone" type="text" class="px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-teal-900 outline-none" placeholder="Telefone" required>
+                    <input name="telephone" id="telephone" maxlength="14" type="text" class="px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-teal-900 outline-none" placeholder="Telefone" required>
                     <input name="email" type="email" class="px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-teal-900 outline-none" placeholder="E-mail" required>
                     <input name="photo" type="text" class="px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-teal-900 outline-none md:col-span-2" placeholder="URL da foto">
                 </div>
