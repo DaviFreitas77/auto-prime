@@ -144,26 +144,29 @@ unset($_SESSION['success'], $_SESSION['errors']);
                         </div>
                     <?php endif; ?>
                 </div>
-                <div class="grid grid-cols-8 text-base py-3 w-full border border-[#F3F4F6] rounded-sm text-center ">
+                <div class="grid grid-cols-10 text-base py-3 w-full border border-[#F3F4F6] rounded-sm text-center ">
                     <p class="font-medium text-teal-900">Id</p>
                     <p class="font-medium">Nome</p>
                     <p class="font-medium">Cargo</p>
                     <p class="font-medium">Salário</p>
-                    <p class="font-medium">Endereço</p>
+                    <p class="font-medium">Telefone</p>
                     <p class="font-medium">Setor</p>
-
+                    <p class="font-medium">endereço</p>
+                    <p class="font-medium">DT/admissão</p>
                     <p class="font-medium">atualizar</p>
                     <p class="font-medium">excluir</p>
                 </div>
 
                 <?php foreach ($pagina_atual as $emp): ?>
-                    <div class="grid grid-cols-8 text-sm py-3 w-full border border-[#F3F4F6] rounded-sm text-center items-center ">
+                    <div class="grid grid-cols-10 text-sm py-3 w-full border border-[#F3F4F6] rounded-sm text-center items-center ">
                         <p class="text-teal-900"><?= $emp['id'] ?></p>
                         <p><?= $emp['name'] ?></p>
                         <p><?= $emp['position'] ?></p>
                         <p>R$ <?= $emp['wage'] ?></p>
-                        <p class=" address"><?= $emp['address'] ?></p>
+                        <p ><?= $emp['telephone'] ?></p>
                         <p><?= $emp['sector'] ?></p>
+                        <p class="address"><?= $emp['address'] ?></p>
+                        <p ><?= $emp['admission_date'] ?></p>
                         <button class="text-center flex items-center justify-center openModalUpdate ">
                             <a class="bg-[#F3F4F6] w-10 h-10 flex items-center justify-center rounded-full cursor-pointer hover:bg-teal-800  hover:text-white transition-all duration-400">
                                 <p class="font-medium"><i class="fa-solid fa-pencil"></i></p>
