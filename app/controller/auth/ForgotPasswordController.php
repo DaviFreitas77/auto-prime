@@ -62,8 +62,63 @@ class ForgotPasswordController
         }
         $_SESSION['cpf'] = $forgot['cpf'];
         //envia o email
-        $subject = 'Recuperar sua senha';
-        $message = "Olá " . $forgot['nome'] . ", você solicitou a recuperação da senha. Use este código para continuar: " . $codigo;
+        $subject = "Recuperar sua senha";
+
+        $message = sprintf(
+            '
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Recuperação de Senha</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin:0; padding:0; background-color:#f4f4f4;">
+  <table width="100%%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f4f4; padding:20px 0;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" border="0" style="background:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+          
+          <!-- Header -->
+          <tr>
+            <td align="center" style="background-color:#004d40; padding:20px;">
+              <h1 style="color:#ffffff; margin:0; font-size:24px;">Auto Prime</h1>
+            </td>
+          </tr>
+          
+          <!-- Corpo -->
+          <tr>
+            <td style="padding:30px; color:#333333; font-size:16px; line-height:1.5;">
+              <p>Olá <strong>%s</strong>,</p>
+              <p>Você solicitou a recuperação da sua senha.</p>
+              <p>Use este código para continuar:</p>
+              
+              <p style="text-align:center; margin:30px 0;">
+                <span style="display:inline-block; padding:12px 24px; font-size:20px; font-weight:bold; color:#004d40; background:#e0f2f1; border-radius:6px; border:1px solid #004d40;">
+                  %s
+                </span>
+              </p>
+              
+              <p>Se você não fez essa solicitação, pode ignorar este e-mail.</p>
+            </td>
+          </tr>
+          
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="background-color:#f1f1f1; padding:15px; font-size:12px; color:#666666;">
+              <p style="margin:0;">&copy; %s Sistema Auto Prime. Todos os direitos reservados.</p>
+            </td>
+          </tr>
+          
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>',
+            htmlspecialchars($forgot['nome']),
+            htmlspecialchars($codigo),
+            date('Y')
+        );
 
         $email = new SendMailController($forgot['nome'], $forgot['email'], $subject, $message);
         $sendEmail = $email->SendMail();
@@ -112,7 +167,7 @@ class ForgotPasswordController
         if ($forgotPassword->changePassword($hashPassword)) {
             unset($_SESSION['cpf']);
             $forgotPassword->deleteCode();
-            RedirectHelper::redirectWithSuccess("Senha atualizada","message",[],'../../../resources/view/login.php');
+            RedirectHelper::redirectWithSuccess("Senha atualizada", "message", [], '../../../resources/view/login.php');
         } else {
             RedirectHelper::redirectWithError("Erro ao atualizar senha", "message", ['errorPassword' => true]);
         }

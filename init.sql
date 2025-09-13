@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS  tb_employee(
 INSERT INTO tb_employee (name, cpf, position, sector, admission_date, wage, address, telephone, email, photo) VALUES
 ('Ana Silva', '000.000.000-00', 'Gerente', 'Financeiro', '2020-01-15', 5500.00, 'Rua A, 123', '(11) 95204-1574', 'ana.silva@email.com', NULL),
 ('Bruno Costa', '222.222.222-22', 'Analista', 'TI', '2019-03-10', 4200.50, 'Rua B, 456', '(11) 95204-1575', 'bruno.costa@email.com', NULL),
-('Carla Mendes', '333.333.333-33', 'Coordenadora', 'Marketing', '2021-06-20', 4800.75, 'Rua C, 789', '(11) 95204-1576', 'carla.mendes@email.com', NULL),
+('Carla Mendes', '333.333.333-33', 'Coordenadora', 'Marketing', '2021-06-20', 4800.75, 'Rua C, 789', '(11) 95204-1576', 'carla.mendes@email.com', NULL);
 
 
 -- Insere dados

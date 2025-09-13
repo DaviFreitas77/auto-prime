@@ -124,7 +124,7 @@ unset($_SESSION['success'], $_SESSION['errors']);
                     <input
                         name="search"
                         class="outline-none border border-[#F3F4F6] rounded-sm w-full h-12 pl-10 pr-12"
-                        type="text" placeholder="Pesquisar">
+                        type="text" placeholder="Pesquisar por nome, cargo ou setor">
 
                     <button type="submit" class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
                         <i class="fa-solid fa-arrow-right text-gray-400"></i>
